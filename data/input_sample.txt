@@ -1,0 +1,11 @@
+Age: 81
+Sex: Female
+Race: Hispanic
+
+Prescriptions:
+sevelamer
+furosemide
+potassium chloride
+folic acid
+lisinopril
+vancomycin
