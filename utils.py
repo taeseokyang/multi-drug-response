@@ -112,22 +112,28 @@ def generate_feature(input_text_path, feature_type):
 
     # 특징 형태 DTI 일 경우 DTI 형태 특징으로 교체
     if feature_type == 'DTI':
+        # 예시 약물 가져와서 피처 초기화
         ti_sum = np.zeros(len(ingredients_df['DTI'][1223]))
+        # 각 약물 벡터 합 연산
         for each_drug in pres_list:
             rxcui = rxcui_dict[each_drug]
             each_ti = np.array(ingredients_df['DTI'][rxcui], dtype=np.float64)
             ti_sum += each_ti
         ti_df = pd.DataFrame(ti_sum).T
+        # 피처 교체 후 반환
         ti_df = pd.concat([ti_df, feature_df.loc[:, 'Sex_FEMALE':]], axis=1)
         return ti_df
     # 특징 형태 MF 일 경우 MF 형태 특징으로 교체
     elif feature_type == 'MF':
+        # 예시 약물 가져와서 피처 초기화
         fp_sum = np.zeros(len(ingredients_df['Fingerprint'][1223]))
+        # 각 약물 벡터 합 연산
         for each_drug in pres_list:
             rxcui = rxcui_dict[each_drug]
             each_fp = np.array(ingredients_df['Fingerprint'][rxcui], dtype=np.float64)
             fp_sum += each_fp
         fp_df = pd.DataFrame(fp_sum).T
+        # 피처 교체 후 반환
         fp_df = pd.concat([fp_df, feature_df.loc[:, 'Sex_FEMALE':]], axis=1)
         return fp_df
     # 특징 형태 API 그대로 리턴
